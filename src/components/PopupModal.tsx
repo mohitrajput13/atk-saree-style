@@ -10,7 +10,6 @@ interface PopupModalProps {
 
 const PopupModal = ({ isOpen, onClose }: PopupModalProps) => {
   const navigate = useNavigate();
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -25,9 +24,6 @@ const PopupModal = ({ isOpen, onClose }: PopupModalProps) => {
   }, [isOpen]);
 
   const handleOptionSelect = (option: 'affordable' | 'luxury') => {
-    setSelectedOption(option);
-    
-    // Navigate to the appropriate page after a brief delay
     setTimeout(() => {
       if (option === 'affordable') {
         navigate('/affordable');
@@ -44,148 +40,92 @@ const PopupModal = ({ isOpen, onClose }: PopupModalProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50"
         onClick={onClose}
       />
       
-      {/* Modal Content */}
-      <div className="relative bg-background rounded-2xl shadow-luxury max-w-4xl w-full mx-4 overflow-hidden">
+      {/* Modal Content - exactly like screenshot */}
+      <div className="relative bg-white rounded-lg shadow-2xl w-[600px] mx-4 overflow-hidden">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 text-gray-600 hover:text-gray-800"
         >
           <X className="h-5 w-5" />
         </button>
 
-        {/* Modal Header */}
-        <div className="bg-gradient-soft p-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gradient-luxury mb-4">
-            Choose Your Style
+        {/* Pop up landing heading - exact text from image */}
+        <div className="text-center py-8 bg-gray-50">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Pop up landing
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Select the perfect collection that matches your taste and budget
-          </p>
         </div>
 
-        {/* Options Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          {/* Affordable Option */}
+        {/* Two Options Side by Side */}
+        <div className="grid grid-cols-2">
+          {/* Left Option - Affordable */}
           <div 
-            className={`p-8 cursor-pointer transition-all duration-300 hover:bg-accent group ${
-              selectedOption === 'affordable' ? 'bg-accent ring-2 ring-primary' : ''
-            }`}
+            className="p-8 text-center cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => handleOptionSelect('affordable')}
           >
-            <div className="text-center space-y-6">
-              {/* Icon/Badge */}
-              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">₹</span>
-                </div>
+            <div className="space-y-6">
+              {/* Main product image */}
+              <div className="w-32 h-32 mx-auto mb-4">
+                <img 
+                  src="/lovable-uploads/046ae260-fc4b-4f74-89aa-929b5fa756cb.png"
+                  alt="Affordable saree collection"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
-
-              {/* Content */}
-              <div className="space-y-4">
-                <h3 className="text-2xl font-heading font-bold text-foreground">
-                  Affordable Look
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  Home page lux
                 </h3>
-                <div className="text-3xl font-bold text-primary">
-                  ₹999
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Beautiful handloom sarees with traditional craftsmanship at accessible prices. 
-                  Perfect for everyday elegance and special occasions.
-                </p>
-              </div>
-
-              {/* Features */}
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                  <span>Quality handloom fabric</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                  <span>Traditional designs</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                  <span>Free shipping</span>
+                <div className="text-2xl font-bold text-orange-600 mb-4">
+                  ₹999/-
                 </div>
               </div>
 
               <Button 
-                variant="outline-luxury" 
-                size="lg"
-                className="w-full group-hover:bg-primary group-hover:text-primary-foreground"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded"
               >
-                Explore Affordable Collection
+                Choose This
               </Button>
             </div>
           </div>
 
-          {/* Luxury Option */}
+          {/* Right Option - Luxury */}
           <div 
-            className={`p-8 cursor-pointer transition-all duration-300 hover:bg-accent group border-l border-border ${
-              selectedOption === 'luxury' ? 'bg-accent ring-2 ring-primary' : ''
-            }`}
+            className="p-8 text-center cursor-pointer hover:bg-gray-50 transition-colors border-l border-gray-200"
             onClick={() => handleOptionSelect('luxury')}
           >
-            <div className="text-center space-y-6">
-              {/* Icon/Badge */}
-              <div className="w-20 h-20 mx-auto bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-secondary to-secondary-dark rounded-full flex items-center justify-center">
-                  <span className="text-secondary-foreground font-bold text-lg">✨</span>
-                </div>
+            <div className="space-y-6">
+              {/* Main product image */}
+              <div className="w-32 h-32 mx-auto mb-4">
+                <img 
+                  src="/lovable-uploads/82fd4dde-7a76-46f0-ad1d-8b581d601d0a.png"
+                  alt="Luxury saree collection"
+                  className="w-full h-full object-cover rounded-lg"
+                />
               </div>
-
-              {/* Content */}
-              <div className="space-y-4">
-                <h3 className="text-2xl font-heading font-bold text-foreground">
-                  Luxury Look
+              
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  Home page lux
                 </h3>
-                <div className="text-3xl font-bold text-gradient-gold">
-                  ₹1799
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Premium handwoven sarees with intricate embroidery and finest materials. 
-                  Crafted for connoisseurs who appreciate exceptional artistry.
-                </p>
-              </div>
-
-              {/* Features */}
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full"></div>
-                  <span>Premium silk & fabrics</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full"></div>
-                  <span>Intricate embroidery work</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full"></div>
-                  <span>Exclusive designs</span>
+                <div className="text-2xl font-bold text-orange-600 mb-4">
+                  ₹1799/-
                 </div>
               </div>
 
               <Button 
-                variant="luxury" 
-                size="lg"
-                className="w-full"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded"
               >
-                Explore Luxury Collection
+                Choose This
               </Button>
             </div>
           </div>
-        </div>
-
-        {/* Bottom Note */}
-        <div className="bg-accent/50 p-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            ✨ Both collections feature authentic handloom craftsmanship and come with our quality guarantee
-          </p>
         </div>
       </div>
     </div>

@@ -16,12 +16,12 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl lg:text-3xl font-heading font-bold text-gradient-luxury">
+          <Link to="/" className="flex items-center">
+            <div className="text-2xl font-serif font-bold text-red-600">
               Atulya Karigari
             </div>
           </Link>
@@ -30,25 +30,25 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-8">
             <Link 
               to="/collections" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-gray-700 hover:text-red-600 transition-colors font-medium"
             >
               Collections
             </Link>
             <Link 
               to="/fabrics" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-gray-700 hover:text-red-600 transition-colors font-medium"
             >
               Shop by Fabric
             </Link>
             <Link 
               to="/about" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-gray-700 hover:text-red-600 transition-colors font-medium"
             >
               About Us
             </Link>
             <Link 
               to="/contact" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-gray-700 hover:text-red-600 transition-colors font-medium"
             >
               Contact
             </Link>
@@ -57,18 +57,18 @@ const Navbar = () => {
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
+              <Search className="h-5 w-5 text-gray-600" />
             </Button>
             <Button variant="ghost" size="icon">
-              <Heart className="h-5 w-5" />
+              <Heart className="h-5 w-5 text-gray-600" />
             </Button>
             <Button variant="ghost" size="icon">
-              <ShoppingBag className="h-5 w-5" />
+              <ShoppingBag className="h-5 w-5 text-gray-600" />
             </Button>
             <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
+              <User className="h-5 w-5 text-gray-600" />
             </Button>
-            <Button variant="luxury" size="lg">
+            <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">
               Shop Now
             </Button>
           </div>
@@ -76,13 +76,13 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-2">
             <Button variant="ghost" size="icon">
-              <ShoppingBag className="h-5 w-5" />
+              <ShoppingBag className="h-5 w-5 text-gray-600" />
             </Button>
             <Button variant="ghost" size="icon" onClick={toggleMenu}>
               {isMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 text-gray-600" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6 text-gray-600" />
               )}
             </Button>
           </div>
@@ -90,48 +90,48 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-border">
+          <div className="lg:hidden border-t border-gray-200">
             <div className="py-4 space-y-4">
               <Link 
                 to="/collections" 
-                className="block text-foreground hover:text-primary transition-colors font-medium py-2"
+                className="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2"
                 onClick={toggleMenu}
               >
                 Collections
               </Link>
               <Link 
                 to="/fabrics" 
-                className="block text-foreground hover:text-primary transition-colors font-medium py-2"
+                className="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2"
                 onClick={toggleMenu}
               >
                 Shop by Fabric
               </Link>
               <Link 
                 to="/about" 
-                className="block text-foreground hover:text-primary transition-colors font-medium py-2"
+                className="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2"
                 onClick={toggleMenu}
               >
                 About Us
               </Link>
               <Link 
                 to="/contact" 
-                className="block text-foreground hover:text-primary transition-colors font-medium py-2"
+                className="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2"
                 onClick={toggleMenu}
               >
                 Contact
               </Link>
               <div className="flex items-center space-x-4 pt-4">
                 <Button variant="ghost" size="icon">
-                  <Search className="h-5 w-5" />
+                  <Search className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button variant="ghost" size="icon">
-                  <Heart className="h-5 w-5" />
+                  <Heart className="h-5 w-5 text-gray-600" />
                 </Button>
                 <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
+                  <User className="h-5 w-5 text-gray-600" />
                 </Button>
               </div>
-              <Button variant="luxury" size="lg" className="w-full mt-4">
+              <Button className="bg-red-600 hover:bg-red-700 text-white w-full mt-4 py-2 rounded">
                 Shop Now
               </Button>
             </div>

@@ -1,172 +1,110 @@
-import { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
-// Testimonials data matching the design
-const testimonials = [
-  {
-    id: 1,
-    name: 'Nivedita Roy, Kolkata',
-    rating: 5,
-    text: 'As someone who collects handloom sarees, I was blown away by the craftsmanship and story behind every Atulya saree pieces. Truly exceptional art.',
-    avatar: '/lovable-uploads/b81453ff-045b-4874-80d8-2fe3216ee88e.png'
-  },
-  {
-    id: 2,
-    name: 'Priya Sharma, Mumbai',
-    rating: 5,
-    text: 'The quality of silk and intricate embroidery work is absolutely stunning. Each saree tells a beautiful story of Indian heritage and craftsmanship.',
-    avatar: '/lovable-uploads/b81453ff-045b-4874-80d8-2fe3216ee88e.png'
-  },
-  {
-    id: 3,
-    name: 'Meera Patel, Ahmedabad',
-    rating: 5,
-    text: 'Atulya Karigari has redefined luxury for me. The attention to detail and authentic handloom work makes every piece a treasured possession.',
-    avatar: '/lovable-uploads/b81453ff-045b-4874-80d8-2fe3216ee88e.png'
-  }
-];
+import { Star } from 'lucide-react';
 
 const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(nextTestimonial, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="section-padding bg-background">
-      <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side - Image and Description */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-heading font-bold mb-4">
-                Testimonials
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mb-6"></div>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Hear from our satisfied clients have to say. 
-                <span className="text-primary ml-2">❤️</span>
-              </p>
-            </div>
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-2 gap-16 items-center">
+          {/* Left Side - Image and Content */}
+          <div>
+            <h2 className="text-4xl font-serif text-gray-800 mb-2">
+              Testimonials
+            </h2>
+            <div className="w-16 h-1 bg-orange-400 mb-6"></div>
+            
+            <p className="text-lg text-gray-600 mb-8">
+              Hear from our satisfied<br />
+              Clients have to say. ❤️
+            </p>
 
-            {/* Featured Image */}
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-luxury">
-                <img 
-                  src="/lovable-uploads/b81453ff-045b-4874-80d8-2fe3216ee88e.png"
-                  alt="Happy customers wearing beautiful sarees"
-                  className="w-full h-80 object-cover"
-                />
-              </div>
-              
-              {/* Decorative Pattern Overlay */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-full -z-10"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full -z-10"></div>
+            {/* Main testimonial image */}
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <img 
+                src="/lovable-uploads/b81453ff-045b-4874-80d8-2fe3216ee88e.png"
+                alt="Happy customers in beautiful sarees"
+                className="w-full h-80 object-cover"
+              />
             </div>
           </div>
 
-          {/* Right Side - Testimonials Carousel */}
-          <div className="space-y-8">
-            <div className="relative">
-              {/* Navigation Buttons */}
-              <div className="flex justify-end space-x-2 mb-6">
-                <Button 
-                  variant="outline" 
-                  size="icon"
-                  onClick={prevTestimonial}
-                  className="h-10 w-10"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="icon"
-                  onClick={nextTestimonial}
-                  className="h-10 w-10"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
+          {/* Right Side - Testimonial Cards Stack */}
+          <div className="space-y-4">
+            {/* First Testimonial Card */}
+            <div className="bg-red-900 text-white p-6 rounded-lg relative">
+              {/* Stars */}
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
               </div>
-
-              {/* Testimonials Stack */}
-              <div className="space-y-4">
-                {testimonials.map((testimonial, index) => {
-                  const isActive = index === currentIndex;
-                  const offset = index - currentIndex;
-                  
-                  return (
-                    <div
-                      key={testimonial.id}
-                      className={`card-luxury p-6 transition-all duration-500 ${
-                        isActive 
-                          ? 'opacity-100 scale-100 z-20' 
-                          : 'opacity-60 scale-95 z-10'
-                      }`}
-                      style={{
-                        transform: `translateY(${offset * 20}px)`,
-                      }}
-                    >
-                      {/* Rating Stars */}
-                      <div className="flex items-center space-x-1 mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className="h-5 w-5 fill-secondary text-secondary" 
-                          />
-                        ))}
-                      </div>
-
-                      {/* Testimonial Text */}
-                      <p className="text-foreground leading-relaxed mb-6 font-medium">
-                        "{testimonial.text}"
-                      </p>
-
-                      {/* Customer Info */}
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary p-0.5">
-                          <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
-                            <span className="text-primary font-heading font-semibold text-lg">
-                              {testimonial.name.charAt(0)}
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground">
-                            {testimonial.name}
-                          </h4>
-                          <div className="w-6 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              
+              <p className="text-sm mb-4 leading-relaxed">
+                "As someone who collects handloom sarees, I was blown away by the craftsmanship and story behind every Atulya saree pieces. Truly exceptional art."
+              </p>
+              
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-white rounded-full mr-3 flex items-center justify-center">
+                  <span className="text-red-900 font-semibold text-sm">N</span>
+                </div>
+                <span className="text-sm font-medium">Nivedita Roy, Kolkata</span>
+              </div>
+              
+              {/* Arrow on the right */}
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-orange-400 w-8 h-8 rounded flex items-center justify-center">
+                <span className="text-white text-sm">→</span>
               </div>
             </div>
 
-            {/* Dots Indicator */}
-            <div className="flex justify-center space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? 'bg-primary scale-125'
-                      : 'bg-border hover:bg-primary/50'
-                  }`}
-                />
-              ))}
+            {/* Second Testimonial Card */}
+            <div className="bg-red-900 text-white p-6 rounded-lg relative">
+              {/* Stars */}
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              
+              <p className="text-sm mb-4 leading-relaxed">
+                "As someone who collects handloom sarees, I was blown away by the craftsmanship and story behind every Atulya saree pieces. Truly exceptional art."
+              </p>
+              
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-white rounded-full mr-3 flex items-center justify-center">
+                  <span className="text-red-900 font-semibold text-sm">N</span>
+                </div>
+                <span className="text-sm font-medium">Nivedita Roy, Kolkata</span>
+              </div>
+              
+              {/* Arrow on the right */}
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-orange-400 w-8 h-8 rounded flex items-center justify-center">
+                <span className="text-white text-sm">→</span>
+              </div>
+            </div>
+
+            {/* Third Testimonial Card */}
+            <div className="bg-red-900 text-white p-6 rounded-lg relative">
+              {/* Stars */}
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              
+              <p className="text-sm mb-4 leading-relaxed">
+                "As someone who collects handloom sarees, I was blown away by the craftsmanship and story behind every Atulya saree pieces. Truly exceptional art."
+              </p>
+              
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-white rounded-full mr-3 flex items-center justify-center">
+                  <span className="text-red-900 font-semibold text-sm">N</span>
+                </div>
+                <span className="text-sm font-medium">Nivedita Roy, Kolkata</span>
+              </div>
+              
+              {/* Arrow on the right */}
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-orange-400 w-8 h-8 rounded flex items-center justify-center">
+                <span className="text-white text-sm">→</span>
+              </div>
             </div>
           </div>
         </div>
