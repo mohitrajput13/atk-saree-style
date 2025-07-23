@@ -1,42 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ATK Saree Store Design System - Luxury Traditional Aesthetic */
 
 @layer base {
   :root {
+    /* Brand Colors - Rich Traditional Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 345 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 345 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 345 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Burgundy */
+    --primary: 345 65% 25%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 345 55% 35%;
+    --primary-dark: 345 75% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm Gold */
+    --secondary: 45 85% 70%;
+    --secondary-foreground: 345 25% 15%;
+    --secondary-light: 45 90% 85%;
+    --secondary-dark: 45 80% 55%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent Colors */
+    --accent: 25 45% 95%;
+    --accent-foreground: 345 25% 15%;
+    --accent-warm: 25 35% 92%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted Colors */
+    --muted: 25 15% 96%;
+    --muted-foreground: 345 15% 45%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 25 25% 90%;
+    --input: 25 25% 94%;
+    --ring: 345 65% 25%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Brand Colors */
+    --luxury-gold: 45 85% 70%;
+    --luxury-burgundy: 345 65% 25%;
+    --luxury-cream: 25 45% 95%;
+    --luxury-rose: 345 55% 85%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(345 65% 25%), hsl(345 55% 35%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 85% 70%), hsl(45 80% 55%));
+    --gradient-luxury: linear-gradient(135deg, hsl(345 65% 25%), hsl(45 85% 70%));
+    --gradient-soft: linear-gradient(180deg, hsl(25 45% 98%), hsl(25 35% 96%));
+
+    /* Shadows */
+    --shadow-luxury: 0 10px 40px -10px hsl(345 65% 25% / 0.3);
+    --shadow-gold: 0 8px 30px -8px hsl(45 85% 70% / 0.4);
+    --shadow-soft: 0 4px 20px -4px hsl(345 25% 15% / 0.1);
+
+    /* Typography Scale */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Animations */
+    --transition-luxury: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-quick: all 0.2s ease-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +135,65 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Custom button variants for luxury aesthetic */
+  .btn-luxury {
+    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground;
+    @apply px-8 py-3 rounded-lg font-medium tracking-wide;
+    @apply shadow-luxury hover:shadow-gold transition-all duration-300;
+    @apply hover:scale-105 hover:from-primary-light hover:to-secondary;
+  }
+
+  .btn-gold {
+    @apply bg-gradient-to-r from-secondary to-secondary-dark text-secondary-foreground;
+    @apply px-8 py-3 rounded-lg font-medium tracking-wide;
+    @apply shadow-gold hover:shadow-luxury transition-all duration-300;
+    @apply hover:scale-105;
+  }
+
+  .btn-outline-luxury {
+    @apply border-2 border-primary text-primary bg-transparent;
+    @apply px-8 py-3 rounded-lg font-medium tracking-wide;
+    @apply hover:bg-primary hover:text-primary-foreground;
+    @apply transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card-luxury {
+    @apply bg-card border border-border rounded-xl shadow-soft;
+    @apply hover:shadow-luxury transition-all duration-300;
+    @apply hover:scale-[1.02];
+  }
+
+  .card-product {
+    @apply bg-card border border-border rounded-xl overflow-hidden;
+    @apply shadow-soft hover:shadow-luxury transition-all duration-300;
+    @apply hover:scale-[1.02] group;
+  }
+
+  /* Text gradients */
+  .text-gradient-luxury {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-secondary to-secondary-dark bg-clip-text text-transparent;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
